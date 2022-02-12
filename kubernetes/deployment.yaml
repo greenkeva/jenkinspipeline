@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inspoquotes
+  labels:
+    app: inspoquotes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inspoquotes
+  template:
+    metadata:
+      labels:
+        app: inspoquotes
+    spec:
+      containers:
+        - name: inspoquotes-cs
+          image:
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always

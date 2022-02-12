@@ -1,0 +1,16 @@
+div #About{
+    text-align: center;
+    margin:auto;
+    color: white;
+    font-size: xx-large;
+    background-color:black;
+}
+h3{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    color: white;
+}
+div #Form1 {
+    text-align: center;
+}
+

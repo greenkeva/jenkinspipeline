@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c701031c.chunk.css",
+    "main.js": "/static/js/main.693742cf.chunk.js",
+    "main.js.map": "/static/js/main.693742cf.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.a351ba2e.js",
+    "runtime-main.js.map": "/static/js/runtime-main.a351ba2e.js.map",
+    "static/css/2.0a9ec390.chunk.css": "/static/css/2.0a9ec390.chunk.css",
+    "static/js/2.ee0aaa90.chunk.js": "/static/js/2.ee0aaa90.chunk.js",
+    "static/js/2.ee0aaa90.chunk.js.map": "/static/js/2.ee0aaa90.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.0a9ec390.chunk.css.map": "/static/css/2.0a9ec390.chunk.css.map",
+    "static/css/main.c701031c.chunk.css.map": "/static/css/main.c701031c.chunk.css.map",
+    "static/js/2.ee0aaa90.chunk.js.LICENSE.txt": "/static/js/2.ee0aaa90.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/static/media/trumpet_player.9a58a03a.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a351ba2e.js",
+    "static/css/2.0a9ec390.chunk.css",
+    "static/js/2.ee0aaa90.chunk.js",
+    "static/css/main.c701031c.chunk.css",
+    "static/js/main.693742cf.chunk.js"
+  ]
+}

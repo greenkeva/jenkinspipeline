@@ -1,0 +1,25 @@
+div #quotes h2 {
+  text-align: center;
+  background-color: black;
+  color: white;
+}
+
+div #quote h2 {
+  text-align: center;
+  color: white;
+}
+
+div #container h2 {
+  text-align: center;
+  background-color: rgba(250, 228, 106, 0.87);
+  margin: auto;
+  padding-left: 0;
+  padding-right: 0;
+  height: 500px;
+  line-height: 500px;
+  width: 50%;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  text-size-adjust: auto;
+  font-size: 25px;
+}
