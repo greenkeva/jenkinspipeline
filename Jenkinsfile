@@ -9,7 +9,7 @@ pipeline {
         IBM_CLOUD_DEVOPS_WEBHOOK_URL = 'https://jenkins:3204a26e-3591-4964-8efa-e0bb7d927003:1a03501c-dcbf-46ae-b8f4-01d004d0d8ec@devops-api.us-south.devops.cloud.ibm.com/v1/toolint/messaging/webhook/publish'
     }
     tools {
-        nodejs '14.17.6'
+        nodejs 'Node-14.17.6'
     }
     stages {
         stage('Build') {
