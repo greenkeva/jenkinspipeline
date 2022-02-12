@@ -24,7 +24,6 @@ pipeline {
                 sh 'npm --version'
                 sh 'npm install'
                 sh 'npm install --save-dev @wojtekmaj/enzyme-adapter-react-17'
-                sh 'grunt dev-setup --no-color'
             }
             // post build section to use "publishBuildRecord" method to publish build record
             post {
@@ -38,7 +37,7 @@ pipeline {
         }
         stage('Unit Test and Code Coverage') {
             steps {
-                sh 'grunt dev-test-cov --no-color -f'
+                sh 'npm test'
             }
             // post build section to use "publishTestResult" method to publish test result
             post {
