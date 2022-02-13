@@ -16,7 +16,7 @@ pipeline {
             environment {
                 // get git commit from Jenkins
                 GIT_COMMIT = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
-                GIT_BRANCH = 'main'
+                GIT_BRANCH = 'master'
                 GIT_REPO = 'https://us-south.git.cloud.ibm.com/Shekeva.Green/deploy_demo.git'
             }
             steps {
