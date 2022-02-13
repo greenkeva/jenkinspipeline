@@ -15,7 +15,7 @@ describe('renders without crashing', function () {
     });
 
     it('renders a string', () => {
-        const quote = mountedQuote.find('h2').text();
+        const quote = mountedQuote.find('h2');
         expect(quote.length).toBeGreaterThan(0);
     });
     
