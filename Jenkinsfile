@@ -23,6 +23,7 @@ pipeline {
                 checkout scm
                 sh 'npm --version'
                 sh 'npm install'
+                sh 'npm install enzyme'
                 sh 'npm install --save-dev @wojtekmaj/enzyme-adapter-react-17'
             }
             // post build section to use "publishBuildRecord" method to publish build record
