@@ -36,7 +36,7 @@ pipeline {
 //                     publishBuildRecord gitBranch: "${GIT_BRANCH}", gitCommit: "${GIT_COMMIT}", gitRepo: "${GIT_REPO}", result:"FAIL"
 //                  }
 //              }
-//         }
+         }
         stage('Unit Test and Code Coverage') {
             steps {
                 sh 'npm run test'
@@ -72,7 +72,7 @@ pipeline {
 //                     notifyOTC stageName: "Deploy to Staging", status: "FAILURE"
 //                 }
 //             }
-//         }
+        }
         stage('Deploy to Prod') {
             steps {
                 // Push the inspoquotes App to Bluemix, production space
