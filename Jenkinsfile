@@ -28,15 +28,15 @@ pipeline {
                 sh 'npm run build'
             }
             // post build section to use "publishBuildRecord" method to publish build record
-             post {
-                 success {
-                     publishBuildRecord gitBranch: "${GIT_BRANCH}", gitCommit: "${GIT_COMMIT}", gitRepo: "${GIT_REPO}", result:"SUCCESS"
-                 }
-                 failure {
-                    publishBuildRecord gitBranch: "${GIT_BRANCH}", gitCommit: "${GIT_COMMIT}", gitRepo: "${GIT_REPO}", result:"FAIL"
-                 }
-             }
-        }
+//              post {
+//                  success {
+//                      publishBuildRecord gitBranch: "${GIT_BRANCH}", gitCommit: "${GIT_COMMIT}", gitRepo: "${GIT_REPO}", result:"SUCCESS"
+//                  }
+//                  failure {
+//                     publishBuildRecord gitBranch: "${GIT_BRANCH}", gitCommit: "${GIT_COMMIT}", gitRepo: "${GIT_REPO}", result:"FAIL"
+//                  }
+//              }
+//         }
         stage('Unit Test and Code Coverage') {
             steps {
                 sh 'npm run test'
@@ -60,19 +60,19 @@ pipeline {
                     '''
             }
             // post build section to use "publishDeployRecord" method to publish deploy record and notify OTC of stage status
-            post {
-                success {
-                    publishDeployRecord environment: "STAGING", appUrl: "http://staging-${IBM_CLOUD_DEVOPS_APP_NAME}.mybluemix.net", result:"SUCCESS"
-                    // use "notifyOTC" method to notify otc of stage status
-                    notifyOTC stageName: "Deploy to Staging", status: "SUCCESS"
-                }
-                failure {
-                    publishDeployRecord environment: "STAGING", appUrl: "http://staging-${IBM_CLOUD_DEVOPS_APP_NAME}.mybluemix.net", result:"FAIL"
-                    // use "notifyOTC" method to notify otc of stage status
-                    notifyOTC stageName: "Deploy to Staging", status: "FAILURE"
-                }
-            }
-        }
+//             post {
+//                 success {
+//                     publishDeployRecord environment: "STAGING", appUrl: "http://staging-${IBM_CLOUD_DEVOPS_APP_NAME}.mybluemix.net", result:"SUCCESS"
+//                     // use "notifyOTC" method to notify otc of stage status
+//                     notifyOTC stageName: "Deploy to Staging", status: "SUCCESS"
+//                 }
+//                 failure {
+//                     publishDeployRecord environment: "STAGING", appUrl: "http://staging-${IBM_CLOUD_DEVOPS_APP_NAME}.mybluemix.net", result:"FAIL"
+//                     // use "notifyOTC" method to notify otc of stage status
+//                     notifyOTC stageName: "Deploy to Staging", status: "FAILURE"
+//                 }
+//             }
+//         }
         stage('Deploy to Prod') {
             steps {
                 // Push the inspoquotes App to Bluemix, production space
@@ -91,18 +91,18 @@ pipeline {
                     '''
             }
             // post build section to use "publishDeployRecord" method to publish deploy record and notify OTC of stage status
-            post {
-                success {
-                    publishDeployRecord environment: "PRODUCTION", appUrl: "http://prod-${IBM_CLOUD_DEVOPS_APP_NAME}.mybluemix.net", result:"SUCCESS"
-                    // use "notifyOTC" method to notify otc of stage status
-                    notifyOTC stageName: "Deploy to Prod", status: "SUCCESS"
-                }
-                failure {
-                    publishDeployRecord environment: "PRODUCTION", appUrl: "http://prod-${IBM_CLOUD_DEVOPS_APP_NAME}.mybluemix.net", result:"FAIL"
-                    // use "notifyOTC" method to notify otc of stage status
-                    notifyOTC stageName: "Deploy to Prod", status: "FAILURE"
-                }
-            }
+//             post {
+//                 success {
+//                     publishDeployRecord environment: "PRODUCTION", appUrl: "http://prod-${IBM_CLOUD_DEVOPS_APP_NAME}.mybluemix.net", result:"SUCCESS"
+//                     // use "notifyOTC" method to notify otc of stage status
+//                     notifyOTC stageName: "Deploy to Prod", status: "SUCCESS"
+//                 }
+//                 failure {
+//                     publishDeployRecord environment: "PRODUCTION", appUrl: "http://prod-${IBM_CLOUD_DEVOPS_APP_NAME}.mybluemix.net", result:"FAIL"
+//                     // use "notifyOTC" method to notify otc of stage status
+//                     notifyOTC stageName: "Deploy to Prod", status: "FAILURE"
+//                 }
+//             }
         }
     }
 }
