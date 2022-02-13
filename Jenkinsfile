@@ -38,13 +38,7 @@ pipeline {
         stage('Unit Test and Code Coverage') {
             steps {
                 sh 'npm run test'
-            }
-            // post build section to use "publishTestResult" method to publish test result
-            post {
-                always {
-                    publishTestResult type:'unittest', fileLocation: './mochatest.json'
-                    publishTestResult type:'code', fileLocation: './tests/coverage/reports/coverage-summary.json'
-                }
+                echo 'test complete'
             }
         }
         stage('Deploy to Staging') {
@@ -75,27 +69,6 @@ pipeline {
                     // use "notifyOTC" method to notify otc of stage status
                     notifyOTC stageName: "Deploy to Staging", status: "FAILURE"
                 }
-            }
-        }
-        stage('FVT') {
-            //set the APP_URL as the environment variable for the fvt
-            environment {
-                APP_URL = "http://staging-${IBM_CLOUD_DEVOPS_APP_NAME}.mybluemix.net"
-            }
-            steps {
-                sh 'grunt fvt-test --no-color -f'
-            }
-            // post build section to use "publishTestResult" method to publish test result
-            post {
-                always {
-                    publishTestResult type:'fvt', fileLocation: './mochafvt.json', environment: 'STAGING'
-                }
-            }
-        }
-        stage('Gate') {
-            steps {
-                // use "evaluateGate" method to leverage IBM Cloud DevOps gate
-                evaluateGate policy: 'Weather App Policy', forceDecision: 'true'
             }
         }
         stage('Deploy to Prod') {
