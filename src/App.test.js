@@ -4,7 +4,7 @@ import App from './App';
 
 test('renders daily quotes', () => {
   const { getByText } = render(<App />);
-  const text = getByText("quotes");
+  const text = screen.getByText("quotes");
   expect(text).toBeInTheDocument();
 });
 
