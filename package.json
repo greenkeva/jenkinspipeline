@@ -20,7 +20,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test-setup": "npm run setup",
-    "test": "npm test",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "repository": {
