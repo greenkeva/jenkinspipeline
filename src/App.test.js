@@ -11,7 +11,7 @@ it("navigates home when you click the logo", () => {
 
   // Render app
   render(
-    <MemoryRouter initialEntries={['/dashboard']}>
+    <MemoryRouter initialEntries={['/music']}>
       <App />
     </MemoryRouter>,
     root
