@@ -16,7 +16,7 @@ pipeline {
             environment {
                 // get git commit from Jenkins
                 GIT_COMMIT = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
-                GIT_BRANCH = 'master'
+                GIT_BRANCH = 'main'
                 GIT_REPO = 'https://us-south.git.cloud.ibm.com/Shekeva.Green/deploy_demo.git'
             }
             steps {
@@ -37,7 +37,7 @@ pipeline {
         }
         stage('Unit Test and Code Coverage') {
             steps {
-                sh 'npm test'
+                sh 'npm run test'
             }
             // post build section to use "publishTestResult" method to publish test result
             post {
