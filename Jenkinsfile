@@ -48,6 +48,7 @@ pipeline {
                 // Push the inspoquotes App to Bluemix, staging space
                 sh '''
                         echo "CF Login..."
+                        echo pwd
                         cd ..
                         cf api https://api.ng.bluemix.net
                         cf login -a "https://api.us-south.cf.cloud.ibm.com" -u $IBM_CLOUD_DEVOPS_CREDS_USR -p $IBM_CLOUD_DEVOPS_CREDS_PSW -o "Shekeva.Green@ibm.com" -s staging
