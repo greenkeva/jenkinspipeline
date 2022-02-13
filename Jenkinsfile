@@ -102,7 +102,7 @@ pipeline {
 //                     // use "notifyOTC" method to notify otc of stage status
 //                     notifyOTC stageName: "Deploy to Prod", status: "FAILURE"
 //                 }
-//             }
+            }
         }
     }
 }
