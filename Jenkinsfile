@@ -27,14 +27,14 @@ pipeline {
                 sh 'npm install --save-dev @wojtekmaj/enzyme-adapter-react-17'
             }
             // post build section to use "publishBuildRecord" method to publish build record
-//             post {
-//                 success {
-//                     publishBuildRecord gitBranch: "${GIT_BRANCH}", gitCommit: "${GIT_COMMIT}", gitRepo: "${GIT_REPO}", result:"SUCCESS"
-//                 }
-//                 failure {
-//                     publishBuildRecord gitBranch: "${GIT_BRANCH}", gitCommit: "${GIT_COMMIT}", gitRepo: "${GIT_REPO}", result:"FAIL"
-//                 }
-//             }
+             post {
+                 success {
+                     publishBuildRecord gitBranch: "${GIT_BRANCH}", gitCommit: "${GIT_COMMIT}", gitRepo: "${GIT_REPO}", result:"SUCCESS"
+                 }
+                 failure {
+                    publishBuildRecord gitBranch: "${GIT_BRANCH}", gitCommit: "${GIT_COMMIT}", gitRepo: "${GIT_REPO}", result:"FAIL"
+                 }
+             }
         }
         stage('Unit Test and Code Coverage') {
             steps {
