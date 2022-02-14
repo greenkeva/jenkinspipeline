@@ -17,6 +17,7 @@ node {
                          'GIT_BRANCH=master',
                          "GIT_REPO=https://github.com/greenkeva/jenkinspipeline.git"]) {
                     try {
+                        sh echo 'building...'
                         sh 'npm --version'
                         sh 'npm install'
                         sh 'npm install enzyme'
