@@ -87,7 +87,7 @@ pipeline {
                 //sh '''
                         /bin/bash
                         echo "CF Login..."
-                        cf api https://api.ng.bluemix.net
+                        cf api "https://api.ng.bluemix.net"
                         cf login -u $IBM_CLOUD_DEVOPS_CREDS_USR -p $IBM_CLOUD_DEVOPS_CREDS_PSW -o $IBM_CLOUD_DEVOPS_ORG -s production
                         echo "Deploying...."
                         export CF_APP_NAME="prod-$IBM_CLOUD_DEVOPS_APP_NAME"
