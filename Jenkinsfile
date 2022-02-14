@@ -42,7 +42,7 @@ pipeline {
                     target: 'https://api.us-south.cf.cloud.ibm.com',
                     organization: 'IBM_CLOUD_DEVOPS_ORG',
                     cloudSpace: 'dev',
-                    credentialsId: 'IBM_CLOUD_DEVOPS_API_KEY'
+                    credentialsId: 'IBM_CLOUD_DEVOPS_API_KEY',
                     manifestChoice: [manifestFile: '/manifest.yml']
                 )
                 sh '''
