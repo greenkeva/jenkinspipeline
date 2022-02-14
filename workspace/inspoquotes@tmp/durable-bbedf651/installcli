@@ -11,9 +11,9 @@ tar -xvf IBM_Cloud_CLI_0.6.6_amd64.tar.gz
 
 
 # Ignore updates because they need confirmation from the user
-# bx config --check-version=false
+bx config --check-version=false
 
-# bx api https://api.ng.bluemix.net
-# bx login
-# bx target -o Shekeva.Green@ibm.com -s dev
+bx api https://api.ng.bluemix.net
+bx login
+bx target -o Shekeva.Green@ibm.com -s dev
 # bx cf push
