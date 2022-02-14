@@ -32,6 +32,7 @@ node {
                     }
                 }
                 stage('Unit Test and Code Coverage') {
+                    sh 'cd ../..'
                     sh 'npm run test'
                     // use "publishTestResult" method to publish test result
                     publishTestResult type:'unittest', fileLocation: './enzymetest.json'
