@@ -1,4 +1,4 @@
-                        
+                        nvm install 14.17.6                        
                         npm --version
                         npm install
                         npm install enzyme
