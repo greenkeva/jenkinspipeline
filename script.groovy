@@ -12,10 +12,10 @@ tar '-xvf IBM_Cloud_CLI_1.2.3_386.tar.gz'
 // Ignore updates because they need confirmation from the user
 bx config --check-version=false
 
-bx api https://api.ng.bluemix.net
-bx login
+bx api 'https://api.ng.bluemix.net'
+bx login --apikey $YOUR_API_KEY_ID
 bx target -o Shekeva.Green@ibm.com -s dev
-# bx cf push
+//  bx cf push
 }
 
 return this
