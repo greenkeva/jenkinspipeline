@@ -1,7 +1,5 @@
 def installCli(){
-#!/bin/bash
 
-set -e
 
 echo "Installing the IBM Cloud CLI"
 
