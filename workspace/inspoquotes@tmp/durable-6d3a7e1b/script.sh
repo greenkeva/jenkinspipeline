@@ -1,5 +1,6 @@
 #!/bin/bash
-# set -e
+chmod +x script.sh
+set -e
 
 # echo "Installing the IBM Cloud API v.0.6.6"
 
