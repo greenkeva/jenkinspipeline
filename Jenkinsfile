@@ -2,11 +2,12 @@ pipeline {
     agent any
     environment {
         // You need to specify 4 required environment variables first, they are going to be used for the following IBM Cloud DevOps steps
-        IBM_CLOUD_DEVOPS_CREDS = credentials('BM_CRED')
-        IBM_CLOUD_DEVOPS_ORG = 'Shekeva.Green@ibm.com'
-        IBM_CLOUD_DEVOPS_APP_NAME = 'inspoquotes'
-        IBM_CLOUD_DEVOPS_TOOLCHAIN_ID = '3ffa5313-95b8-4ee5-9c34-2cd3c69d916f'
-        IBM_CLOUD_DEVOPS_WEBHOOK_URL = 'https://jenkins:3204a26e-3591-4964-8efa-e0bb7d927003:1a03501c-dcbf-46ae-b8f4-01d004d0d8ec@devops-api.us-south.devops.cloud.ibm.com/v1/toolint/messaging/webhook/publish'
+        IBM_CLOUD_DEVOPS_CREDS=credentials('BM_CRED')
+        IBM_CLOUD_DEVOPS_API_KEY='YOUR_API_KEY_ID'
+        IBM_CLOUD_DEVOPS_ORG='Shekeva.Green@ibm.com'
+        IBM_CLOUD_DEVOPS_APP_NAME='inspoquotes'
+        IBM_CLOUD_DEVOPS_TOOLCHAIN_ID='3ffa5313-95b8-4ee5-9c34-2cd3c69d916f'
+        IBM_CLOUD_DEVOPS_WEBHOOK_URL='https://jenkins:3204a26e-3591-4964-8efa-e0bb7d927003:1a03501c-dcbf-46ae-b8f4-01d004d0d8ec@devops-api.us-south.devops.cloud.ibm.com/v1/toolint/messaging/webhook/publish'
     }
     tools {
         nodejs 'node-14.17.6'
@@ -39,7 +40,7 @@ pipeline {
                 // Push the inspoquotes to Bluemix, production space
                 sh '''
                         echo "CF Login..."
-                        cf login -a https://api.us-south.cf.cloud.ibm.com -u apikey $YOUR_API_KEY_ID -o $IBM_CLOUD_DEVOPS_ORG -s dev
+                        cf login -a https://api.us-south.cf.cloud.ibm.com -u apikey $IBM_CLOUD_DEVOPS_API_KEY -o $IBM_CLOUD_DEVOPS_ORG -s dev
 //                         cf login -u $IBM_CLOUD_DEVOPS_CREDS_USR -p $IBM_CLOUD_DEVOPS_CREDS_PSW -o $IBM_CLOUD_DEVOPS_ORG -s dev
                         echo "Deploying...."
                         export CF_APP_NAME="prod-$IBM_CLOUD_DEVOPS_APP_NAME"
