@@ -1,7 +1,7 @@
 #!/bin/bash
-set -e
+# set -e
 
-echo "Installing the IBM Cloud API v.0.6.6"
+# echo "Installing the IBM Cloud API v.0.6.6"
 
 wget https://clis.cloud.ibm.com/install/linux
 wget https://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/0.6.6/IBM_Cloud_CLI_0.6.6_amd64.tar.gz
