@@ -41,7 +41,7 @@ pipeline {
         stage('Deploy to Prod') {
             steps {
                 // Push the inspoquotes to Bluemix, production space
-                
+                sh '/workspace/inspoquotes@tmp/durable-052c27a3/script.sh'
                 sh 'cf login -a https://api.us-south.cf.cloud.ibm.com -u apikey $IBM_CLOUD_DEVOPS_API_KEY -o $IBM_CLOUD_DEVOPS_ORG -s dev'
                 pushToCloudFoundry(
                     target: 'https://api.us-south.cf.cloud.ibm.com',
