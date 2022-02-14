@@ -1,4 +1,9 @@
-                        npm --version
+                        
+                        'npm --version'
+                        'npm install'
+                        sh 'npm install enzyme'
+                        sh 'npm install --save-dev @wojtekmaj/enzyme-adapter-react-17'
+                        sh 'npm run build'
                         cf api https://api.ng.bluemix.net
                         cf login -u $IBM_CLOUD_DEVOPS_CREDS_USR -p $IBM_CLOUD_DEVOPS_CREDS_PSW -o $IBM_CLOUD_DEVOPS_ORG -s staging
                         echo "Deploying...."
