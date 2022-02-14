@@ -40,9 +40,9 @@ pipeline {
                 // Push the inspoquotes to Bluemix, production space
                 pushToCloudFoundry(
                     target: 'https://api.us-south.cf.cloud.ibm.com',
-                    organization: 'IBM_CLOUD_DEVOPS_ORG',
-                    cloudSpace: 'dev',
-                    credentialsId: 'IBM_CLOUD_DEVOPS_API_KEY',
+                    organization: 'pcfdev-org',
+                    cloudSpace: 'pcfdev-space',
+                    credentialsId: 'pcfdev_user',
                     manifestChoice: [manifestFile: '/manifest.yml']
                 )
                 sh '''
