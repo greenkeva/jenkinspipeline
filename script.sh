@@ -1,5 +1,5 @@
                                               
-                        sh 'npm --version'
+                       
                         sh 'npm install'
                         sh 'npm install enzyme'
                         sh 'npm install --save-dev @wojtekmaj/enzyme-adapter-react-17'
