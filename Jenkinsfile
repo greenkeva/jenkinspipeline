@@ -21,12 +21,12 @@ pipeline {
             }
             steps {
                 checkout scm
-                /bin/bash
-                sh 'npm --version'
-                sh 'npm install'
-                sh 'npm install enzyme'
-                sh 'npm install --save-dev @wojtekmaj/enzyme-adapter-react-17'
-                sh 'npm run build'
+                #!/bin/bash
+                'npm --version'
+                'npm install'
+                'npm install enzyme'
+                'npm install --save-dev @wojtekmaj/enzyme-adapter-react-17'
+                'npm run build'
             }
             // post build section to use "publishBuildRecord" method to publish build record
 //              post {
@@ -40,17 +40,19 @@ pipeline {
          }
         stage('Unit Test and Code Coverage') {
             steps {
+                
+                //sh
                 /bin/bash
-                sh 'npm run test'
+                'npm run test'
                 echo 'test complete'
             }
         }
         stage('Deploy to Staging') {
             steps {
-                /bin/bash
+               
                 // Push the inspoquotes App to Bluemix, staging space
-                sh '''
-             
+              //  sh '''
+                        #!/bin/bash
                         
                         echo "CF Login..."
                         cf api https://api.ng.bluemix.net
@@ -62,7 +64,7 @@ pipeline {
                         # use "cf icd --create-connection" to enable traceability
                         cf icd --create-connection $IBM_CLOUD_DEVOPS_WEBHOOK_URL $CF_APP_NAME
                         export APP_URL=http://$(cf app $CF_APP_NAME | grep urls: | awk '{print $2}')
-                '''  
+              //  '''  
             }
             // post build section to use "publishDeployRecord" method to publish deploy record and notify OTC of stage status
 //             post {
@@ -80,9 +82,10 @@ pipeline {
         }
         stage('Deploy to Prod') {
             steps {
-                /bin/bash
+                
                 // Push the inspoquotes App to Bluemix, production space
-                sh '''
+                //sh '''
+                        /bin/bash
                         echo "CF Login..."
                         cf api https://api.ng.bluemix.net
                         cf login -u $IBM_CLOUD_DEVOPS_CREDS_USR -p $IBM_CLOUD_DEVOPS_CREDS_PSW -o $IBM_CLOUD_DEVOPS_ORG -s production
@@ -94,7 +97,7 @@ pipeline {
                         cf icd --create-connection $IBM_CLOUD_DEVOPS_WEBHOOK_URL $CF_APP_NAME
                         
                         export APP_URL=http://$(cf app $CF_APP_NAME | grep urls: | awk '{print $2}')
-                    '''
+                  //  '''
             }
             // post build section to use "publishDeployRecord" method to publish deploy record and notify OTC of stage status
 //             post {
