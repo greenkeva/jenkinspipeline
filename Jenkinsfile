@@ -50,7 +50,7 @@ pipeline {
 
 
                     // Ignore updates because they need confirmation from the user
-                    bx config --check-version=false
+                    //bx config --check-version=false
 
                     bx api 'https://api.ng.bluemix.net'
                     bx login --apikey $YOUR_API_KEY_ID
