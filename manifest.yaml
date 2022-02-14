@@ -1,0 +1,7 @@
+applications:
+  - name: inspoquotes
+    random-route: true
+    memory: 256M
+    host: inspoquotes
+    path: /build
+    buildpack: staticfile_buildpack
