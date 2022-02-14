@@ -46,7 +46,7 @@ pipeline {
         stage('Deploy to Staging') {
             steps {
                 // Push the inspoquotes App to Bluemix, staging space
-                #!/bin/bash
+                sh '''
              
                         
                         echo "CF Login..."
@@ -59,7 +59,7 @@ pipeline {
                         # use "cf icd --create-connection" to enable traceability
                         cf icd --create-connection $IBM_CLOUD_DEVOPS_WEBHOOK_URL $CF_APP_NAME
                         export APP_URL=http://$(cf app $CF_APP_NAME | grep urls: | awk '{print $2}')
-                  
+                '''  
             }
             // post build section to use "publishDeployRecord" method to publish deploy record and notify OTC of stage status
 //             post {
