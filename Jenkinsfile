@@ -33,7 +33,7 @@ node {
                 stage('Unit Test and Code Coverage') {
                     sh 'npm run test'
                     // use "publishTestResult" method to publish test result
-                    publishTestResult type:'unittest', fileLocation: './mochatest.json'
+                    publishTestResult type:'unittest', fileLocation: './enzymetest.json'
                     publishTestResult type:'code', fileLocation: './tests/coverage/reports/coverage-summary.json'
                 }
                 stage('Deploy to Staging') {
