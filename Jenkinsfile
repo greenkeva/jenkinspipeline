@@ -39,8 +39,9 @@ pipeline {
                 // Push the inspoquotes to Bluemix, production space
                 sh '''
                         echo "CF Login..."
+                        ibmcloud target --cf
                         cf api https://api.ng.bluemix.net
-                        cf login -u $IBM_CLOUD_DEVOPS_CREDS_USR -p $IBM_CLOUD_DEVOPS_CREDS_PSW -o $IBM_CLOUD_DEVOPS_ORG -s production
+                        cf login -u $IBM_CLOUD_DEVOPS_CREDS_USR -p $IBM_CLOUD_DEVOPS_CREDS_PSW -o $IBM_CLOUD_DEVOPS_ORG -s dev
                         echo "Deploying...."
                         export CF_APP_NAME="prod-$IBM_CLOUD_DEVOPS_APP_NAME"
                         cf delete $CF_APP_NAME -f
