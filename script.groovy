@@ -9,7 +9,7 @@ tar '-xvf IBM_Cloud_CLI_1.2.3_386.tar.gz'
 './Bluemix_CLI/install_bluemix_cli'
 
 
-# Ignore updates because they need confirmation from the user
+// Ignore updates because they need confirmation from the user
 bx config --check-version=false
 
 bx api https://api.ng.bluemix.net
