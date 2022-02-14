@@ -42,7 +42,7 @@ pipeline {
             steps {
                 checkout scm
                 // Push the inspoquotes to Bluemix, production space
-                
+                sh "chmod +x -R ${env.WORKSPACE}"
                 sh('bash ./installcli.sh')
                 
                 
