@@ -21,7 +21,7 @@ pipeline {
             }
             steps {
                 checkout scm
-                #!/bin/bash
+                /bin/bash
                 'npm --version'
                 'npm install'
                 'npm install enzyme'
@@ -52,7 +52,7 @@ pipeline {
                
                 // Push the inspoquotes App to Bluemix, staging space
               //  sh '''
-                        #!/bin/bash
+                        /bin/bash
                         
                         echo "CF Login..."
                         cf api https://api.ng.bluemix.net
