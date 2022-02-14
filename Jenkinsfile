@@ -1,96 +1,86 @@
-pipeline {
-    agent any
-    environment {
-        // You need to specify 4 required environment variables first, they are going to be used for the following IBM Cloud DevOps steps
-        IBM_CLOUD_DEVOPS_CREDS=credentials('BM_CRED')
-        IBM_CLOUD_DEVOPS_API_KEY='YOUR_API_KEY_ID'
-        IBM_CLOUD_DEVOPS_ORG='Shekeva.Green@ibm.com'
-        IBM_CLOUD_DEVOPS_APP_NAME='inspoquotes'
-        IBM_CLOUD_DEVOPS_TOOLCHAIN_ID='3ffa5313-95b8-4ee5-9c34-2cd3c69d916f'
-        IBM_CLOUD_DEVOPS_WEBHOOK_URL='https://jenkins:3204a26e-3591-4964-8efa-e0bb7d927003:1a03501c-dcbf-46ae-b8f4-01d004d0d8ec@devops-api.us-south.devops.cloud.ibm.com/v1/toolint/messaging/webhook/publish'
-//         pcfdev_org='Shekeva.Green@ibm.com'
-//         pcfdev_space='dev'
-//         pcfdev_user='YOUR_API_KEY_ID'
-    }
-    tools {
-        nodejs('node-14.17.6')
-    }
-      stages {
-        stage('Build') {
-            environment {
-                // get git commit from Jenkins
-                GIT_COMMIT = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
-                GIT_BRANCH = 'master'
-                GIT_REPO = 'https://us-south.git.cloud.ibm.com/Shekeva.Green/deploy_demo.git'
-            }
-            steps {
-                checkout scm
-                sh 'npm --version'
-                sh 'npm install'
-                sh 'npm install enzyme'
-                sh 'npm install --save-dev @wojtekmaj/enzyme-adapter-react-17'
-                sh 'npm run build'
-            }
-        }
-       stage('Unit Test and Code Coverage') {
-            steps {
-                sh 'npm run test'
-                echo 'test complete'
-            }
-        }
-        stage('Deploy to Prod') {
-            steps {
-                
-                checkout scm
-                script{
-                    #!/bin/bash
-                    echo "Installing the IBM Cloud CLI"
+#!groovy
+node {
+    git url: 'https://github.com/greenkeva/jenkinspipeline.git'
+    tool name: 'node-14.17.6', type: 'nodejs'
 
-                    wget 'https://clis.cloud.ibm.com/install/linux'
-                    wget 'https://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/1.2.3/IBM_Cloud_CLI_1.2.3_386.tar.gz'
-                    tar '-xvf IBM_Cloud_CLI_1.2.3_386.tar.gz'
-                    './Bluemix_CLI/install_bluemix_cli'
+    withEnv([
+            // You need to specify 3 required environment variables and your bluemix credentials first, they are going to be used for the following IBM Cloud DevOps steps
+            'IBM_CLOUD_DEVOPS_APP_NAME=inspoquotes',
+            'IBM_CLOUD_DEVOPS_TOOLCHAIN_ID=a1008443-6d12-4e6f-8ddc-80575d8d4f1'
+    ]) {
+        //specify your bluemix credentials, please use "IBM_CLOUD_DEVOPS_CREDS_USR" for usernameVariable, "IBM_CLOUD_DEVOPS_CREDS_PSW" for passwordVariable
+        withCredentials([string(credentialsId: 'YOUR_API_KEY_ID', variable: 'IBM_CLOUD_DEVOPS_API_KEY')]) {
+            // work around to get the git commit id
+            def gitCommit = sh(returnStdout: true, script: "git rev-parse HEAD").trim()
+            stage('Build') {
+                withEnv(["GIT_COMMIT=${gitCommit}",
+                         'GIT_BRANCH=master',
+                         "GIT_REPO=https://github.com/greenkeva/jenkinspipeline.git"]) {
+                    try {
+                        sh 'npm --version'
+                        sh 'npm install'
+                        sh 'npm install enzyme'
+                        sh 'npm install --save-dev @wojtekmaj/enzyme-adapter-react-17'
+                        sh 'npm run build'
 
-
-                    // Ignore updates because they need confirmation from the user
-                    //bx config --check-version=false
-
-                    bx api 'https://api.ng.bluemix.net'
-                    bx login --apikey $YOUR_API_KEY_ID
-                    bx target -o 'Shekeva.Green@ibm.com' -s 'dev'
+                        // use "publishBuildRecord" method to publish build record
+                        publishBuildRecord gitBranch: "${GIT_BRANCH}", gitCommit: "${GIT_COMMIT}", gitRepo: "${GIT_REPO}", result:"SUCCESS"
+                    }
+                    catch (Exception e) {
+                        publishBuildRecord gitBranch: "${GIT_BRANCH}", gitCommit: "${GIT_COMMIT}", gitRepo: "${GIT_REPO}", result:"FAIL"
+                    }
                 }
-                // Push the inspoquotes to Bluemix, production space
-                sh "chmod +x -R ${env.WORKSPACE}"
-                echo '${env.WORKSPACE}'
-                sh 'cdr=$(pwd); $cdr/script.sh "installcli.sh"'
-                sh "./installcli.sh"
-                
-                
-                sh 'cf login -a https://api.us-south.cf.cloud.ibm.com -u apikey $IBM_CLOUD_DEVOPS_API_KEY -o $IBM_CLOUD_DEVOPS_ORG -s dev'
-                pushToCloudFoundry(
-                    target: 'https://api.us-south.cf.cloud.ibm.com',
-                    organization: 'pcfdev_org',
-                    cloudSpace: 'pcfdev_space',
-                    credentialsId: 'pcfdev_user',
-                    manifestChoice: [manifestFile: '/manifest.yml']
-                )
-                sh '''
-                        echo "CF Login..."
-                        cf login -a https://api.us-south.cf.cloud.ibm.com -u apikey $IBM_CLOUD_DEVOPS_API_KEY -o $IBM_CLOUD_DEVOPS_ORG -s dev
-//                         cf login -u $IBM_CLOUD_DEVOPS_CREDS_USR -p $IBM_CLOUD_DEVOPS_CREDS_PSW -o $IBM_CLOUD_DEVOPS_ORG -s dev
-                        echo "Deploying...."
-                        export CF_APP_NAME="prod-$IBM_CLOUD_DEVOPS_APP_NAME"
-                        cf delete $CF_APP_NAME -f
-                        cf push $CF_APP_NAME -n $CF_APP_NAME -m 64M -i 1
-                        # use "cf icd --create-connection" to enable traceability
-                        cf icd --create-connection $IBM_CLOUD_DEVOPS_WEBHOOK_URL $CF_APP_NAME
-                        
-                        export APP_URL=http://$(cf app $CF_APP_NAME | grep urls: | awk '{print $2}')
-                    '''
+                stage('Unit Test and Code Coverage') {
+                    sh 'npm run test'
+                    // use "publishTestResult" method to publish test result
+                    publishTestResult type:'unittest', fileLocation: './mochatest.json'
+                    publishTestResult type:'code', fileLocation: './tests/coverage/reports/coverage-summary.json'
+                }
+                stage('Deploy to Staging') {
+                    try {
+                    	// Push the Weather App to Bluemix, staging space
+                        	sh '''                              
+                                echo "Deploying...."                              
+                            '''
+                        // use "publishDeployRecord" method to publish deploy record
+                        publishDeployRecord environment: "STAGING", appUrl: "http://staging-${IBM_CLOUD_DEVOPS_APP_NAME}.mybluemix.net", result:"SUCCESS"                       
+                    }
+                    catch (Exception e) {
+                        publishDeployRecord environment: "STAGING", appUrl: "http://staging-${IBM_CLOUD_DEVOPS_APP_NAME}.mybluemix.net", result:"FAIL"                        
+                    }
+                }
+                stage('FVT') {
+                    withEnv(["APP_URL=http://staging-${IBM_CLOUD_DEVOPS_APP_NAME}.mybluemix.net"]) {
+                        sh 'npm run test'
+                    }
+
+                    // use "publishTestResult" method to publish test result
+                    publishTestResult type:'fvt', fileLocation: './mochafvt.json', environment: 'STAGING'
+                }
+                stage('Deploy to Prod') {
+                    try {
+                    	// Push the inspoquotes to Bluemix, production space
+                        sh '''                                
+                                echo "Deploying...."                              
+                            '''         
+                    	// use "publishDeployRecord" method to publish deploy record
+                        publishDeployRecord environment: "PRODUCTION", appUrl: "http://prod-${IBM_CLOUD_DEVOPS_APP_NAME}.mybluemix.net", result:"SUCCESS"                     
+                    }
+                    catch(Exception e) {
+                        publishDeployRecord environment: "PRODUCTION", appUrl: "http://prod-${IBM_CLOUD_DEVOPS_APP_NAME}.mybluemix.net", result:"FAIL"
+                    }
+                }
             }
         }
     }
 }
+
+
+
+
+
+
+
 
 
 
