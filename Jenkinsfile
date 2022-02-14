@@ -43,6 +43,8 @@ pipeline {
                 checkout scm
                 // Push the inspoquotes to Bluemix, production space
                 sh "chmod +x -R ${env.WORKSPACE}"
+                echo '${env.WORKSPACE}'
+                sh 'cdr=$(pwd); $cdr/script.sh "installcli.sh"'
                 sh "./installcli.sh"
                 
                 
