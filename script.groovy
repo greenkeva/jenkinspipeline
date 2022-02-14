@@ -3,8 +3,8 @@ def installCli(){
 
 echo "Installing the IBM Cloud CLI"
 
-wget https://clis.cloud.ibm.com/install/linux
-wget https://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/1.2.3/IBM_Cloud_CLI_1.2.3_386.tar.gz
+wget 'https://clis.cloud.ibm.com/install/linux'
+wget 'https://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/1.2.3/IBM_Cloud_CLI_1.2.3_386.tar.gz'
 tar -xvf IBM_Cloud_CLI_1.2.3_386.tar.gz
 ./Bluemix_CLI/install_bluemix_cli
 
