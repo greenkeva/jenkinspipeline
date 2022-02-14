@@ -14,7 +14,7 @@ bx config --check-version=false
 
 bx api 'https://api.ng.bluemix.net'
 bx login --apikey $YOUR_API_KEY_ID
-bx target -o Shekeva.Green@ibm.com -s dev
+bx target -o 'Shekeva.Green@ibm.com' -s 'dev'
 //  bx cf push
 }
 
