@@ -46,7 +46,7 @@ pipeline {
         stage('Deploy to Staging') {
             steps {
                 // Push the inspoquotes App to Bluemix, staging space
-                sh '''
+                sh '''#!/bin/bash
              
                         
                         echo "CF Login..."
