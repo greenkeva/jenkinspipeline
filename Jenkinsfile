@@ -42,9 +42,9 @@ pipeline {
             steps {
                 checkout scm
                 // Push the inspoquotes to Bluemix, production space
-                dir('./workspace/'){
-                    sh('./installcli.sh')
-                }
+                
+                sh('bash ./installcli.sh')
+                
                 
                 sh 'cf login -a https://api.us-south.cf.cloud.ibm.com -u apikey $IBM_CLOUD_DEVOPS_API_KEY -o $IBM_CLOUD_DEVOPS_ORG -s dev'
                 pushToCloudFoundry(
