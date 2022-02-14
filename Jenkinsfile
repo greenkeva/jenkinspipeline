@@ -21,6 +21,7 @@ pipeline {
             }
             steps {
                 checkout scm
+                #!/bin/bash
                 sh 'npm --version'
                 sh 'npm install'
                 sh 'npm install enzyme'
