@@ -1,3 +1,4 @@
+                        npm --version
                         cf api https://api.ng.bluemix.net
                         cf login -u $IBM_CLOUD_DEVOPS_CREDS_USR -p $IBM_CLOUD_DEVOPS_CREDS_PSW -o $IBM_CLOUD_DEVOPS_ORG -s staging
                         echo "Deploying...."
