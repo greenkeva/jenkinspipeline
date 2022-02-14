@@ -43,7 +43,7 @@ pipeline {
                 checkout scm
                 // Push the inspoquotes to Bluemix, production space
                 sh "chmod +x -R ${env.WORKSPACE}"
-                sh('bash ./installcli.sh')
+                sh "./installcli.sh"
                 
                 
                 sh 'cf login -a https://api.us-south.cf.cloud.ibm.com -u apikey $IBM_CLOUD_DEVOPS_API_KEY -o $IBM_CLOUD_DEVOPS_ORG -s dev'
