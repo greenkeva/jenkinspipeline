@@ -41,7 +41,7 @@ pipeline {
         stage('Deploy to Prod') {
             steps {
                 // Push the inspoquotes to Bluemix, production space
-                sh(script: "curl -fsSL https://clis.cloud.ibm.com/install/linux | sh")
+                sh(script: "curl -fsSL https://clis.cloud.ibm.com/install/linux bx config --check-version=false| sh")
                 sh 'cf login -a https://api.us-south.cf.cloud.ibm.com -u apikey $IBM_CLOUD_DEVOPS_API_KEY -o $IBM_CLOUD_DEVOPS_ORG -s dev'
                 pushToCloudFoundry(
                     target: 'https://api.us-south.cf.cloud.ibm.com',
