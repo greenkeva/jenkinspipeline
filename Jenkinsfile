@@ -6,7 +6,7 @@ node {
     withEnv([
             // You need to specify 3 required environment variables and your bluemix credentials first, they are going to be used for the following IBM Cloud DevOps steps
             'IBM_CLOUD_DEVOPS_APP_NAME=inspoquotes',
-            'IBM_CLOUD_DEVOPS_TOOLCHAIN_ID=a1008443-6d12-4e6f-8ddc-80575d8d4f1'
+            'IBM_CLOUD_DEVOPS_TOOLCHAIN_ID=3ffa5313-95b8-4ee5-9c34-2cd3c69d916f'
     ]) {
         //specify your bluemix credentials, please use "IBM_CLOUD_DEVOPS_CREDS_USR" for usernameVariable, "IBM_CLOUD_DEVOPS_CREDS_PSW" for passwordVariable
         withCredentials([string(credentialsId: 'YOUR_API_KEY_ID', variable: 'IBM_CLOUD_DEVOPS_API_KEY')]) {
