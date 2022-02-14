@@ -33,6 +33,8 @@ pipeline {
                 echo 'test complete'
             }
         }
+     }
+    }
         stage('Deploy to Staging') {
             steps {
                 // Push the inspoquotes App to Bluemix, staging space
@@ -49,7 +51,7 @@ pipeline {
                         export APP_URL=http://$(cf app $CF_APP_NAME | grep urls: | awk '{print $2}')
                     '''
             }
-      
+        }
         stage('Deploy to Prod') {
             steps {
                 // Push the inspoquotes App to Bluemix, production space
@@ -67,6 +69,7 @@ pipeline {
                         export APP_URL=http://$(cf app $CF_APP_NAME | grep urls: | awk '{print $2}')
                     '''
             }
+        }
             // post build section to use "publishDeployRecord" method to publish deploy record and notify OTC of stage status
             post {
                 success {
