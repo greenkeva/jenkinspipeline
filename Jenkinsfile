@@ -21,7 +21,7 @@ pipeline {
             }
             steps {
                 checkout scm
-                #!/bin/bash
+                /bin/bash
                 sh 'npm --version'
                 sh 'npm install'
                 sh 'npm install enzyme'
@@ -40,14 +40,16 @@ pipeline {
          }
         stage('Unit Test and Code Coverage') {
             steps {
+                /bin/bash
                 sh 'npm run test'
                 echo 'test complete'
             }
         }
         stage('Deploy to Staging') {
             steps {
+                /bin/bash
                 // Push the inspoquotes App to Bluemix, staging space
-                sh '''#!/bin/bash
+                sh '''
              
                         
                         echo "CF Login..."
@@ -78,6 +80,7 @@ pipeline {
         }
         stage('Deploy to Prod') {
             steps {
+                /bin/bash
                 // Push the inspoquotes App to Bluemix, production space
                 sh '''
                         echo "CF Login..."
