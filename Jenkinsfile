@@ -41,8 +41,20 @@ pipeline {
         stage('Deploy to Prod') {
             steps {
                 script{
-                    def gv = load "script.groovy"
-                    gv.installCli()
+                    echo "Installing the IBM Cloud CLI"
+
+                    wget 'https://clis.cloud.ibm.com/install/linux'
+                    wget 'https://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/1.2.3/IBM_Cloud_CLI_1.2.3_386.tar.gz'
+                    tar '-xvf IBM_Cloud_CLI_1.2.3_386.tar.gz'
+                    './Bluemix_CLI/install_bluemix_cli'
+
+
+                    // Ignore updates because they need confirmation from the user
+                    bx config --check-version=false
+
+                    bx api 'https://api.ng.bluemix.net'
+                    bx login --apikey $YOUR_API_KEY_ID
+                    bx target -o 'Shekeva.Green@ibm.com' -s 'dev'
                 }
                 checkout scm
                 // Push the inspoquotes to Bluemix, production space
