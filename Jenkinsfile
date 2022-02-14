@@ -41,6 +41,7 @@ pipeline {
         stage('Deploy to Prod') {
             steps {
                 script{
+                    #!/bin/bash
                     echo "Installing the IBM Cloud CLI"
 
                     wget 'https://clis.cloud.ibm.com/install/linux'
