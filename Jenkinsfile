@@ -8,9 +8,9 @@ pipeline {
         IBM_CLOUD_DEVOPS_APP_NAME='inspoquotes'
         IBM_CLOUD_DEVOPS_TOOLCHAIN_ID='3ffa5313-95b8-4ee5-9c34-2cd3c69d916f'
         IBM_CLOUD_DEVOPS_WEBHOOK_URL='https://jenkins:3204a26e-3591-4964-8efa-e0bb7d927003:1a03501c-dcbf-46ae-b8f4-01d004d0d8ec@devops-api.us-south.devops.cloud.ibm.com/v1/toolint/messaging/webhook/publish'
-        pcfdev-org='Shekeva.Green@ibm.com'
-        pcfdev-space='dev'
-        pcfdev_user='YOUR_API_KEY_ID'
+//         pcfdev_org='Shekeva.Green@ibm.com'
+//         pcfdev_space='dev'
+//         pcfdev_user='YOUR_API_KEY_ID'
     }
     tools {
         nodejs('node-14.17.6')
@@ -43,8 +43,8 @@ pipeline {
                 // Push the inspoquotes to Bluemix, production space
                 pushToCloudFoundry(
                     target: 'https://api.us-south.cf.cloud.ibm.com',
-                    organization: 'pcfdev-org',
-                    cloudSpace: 'pcfdev-space',
+                    organization: 'pcfdev_org',
+                    cloudSpace: 'pcfdev_space',
                     credentialsId: 'pcfdev_user',
                     manifestChoice: [manifestFile: '/manifest.yml']
                 )
