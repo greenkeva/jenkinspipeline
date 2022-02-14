@@ -40,6 +40,8 @@ pipeline {
         }
         stage('Deploy to Prod') {
             steps {
+                
+                checkout scm
                 script{
                     #!/bin/bash
                     echo "Installing the IBM Cloud CLI"
@@ -57,7 +59,6 @@ pipeline {
                     bx login --apikey $YOUR_API_KEY_ID
                     bx target -o 'Shekeva.Green@ibm.com' -s 'dev'
                 }
-                checkout scm
                 // Push the inspoquotes to Bluemix, production space
                 sh "chmod +x -R ${env.WORKSPACE}"
                 echo '${env.WORKSPACE}'
