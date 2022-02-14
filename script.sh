@@ -1,4 +1,4 @@
-                        nvm install 14.17.6                        
+                                              
                         sh 'npm --version'
                         sh 'npm install'
                         sh 'npm install enzyme'
