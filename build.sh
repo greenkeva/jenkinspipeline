@@ -1,5 +1,5 @@
 #!/bin/bash
-chmod +x jenkins
+sudo chmod +x jenkins
 npm --version
 npm install
 npm install enzyme
