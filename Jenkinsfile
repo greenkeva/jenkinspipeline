@@ -9,8 +9,9 @@ pipeline {
     stages {
     stage('Build') {
         steps {
+            sh 'echo $(pwd)'
             checkout scm
-            sh 'which wget'
+            sh 'echo $(pwd)'
             sh 'chmod +x build.sh'
             sh './build.sh'
         }
