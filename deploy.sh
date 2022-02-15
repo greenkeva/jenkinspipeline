@@ -7,7 +7,8 @@
 echo "Installing the IBM Cloud CLI"
 
 
-wget https://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/1.2.3/IBM_Cloud_CLI_1.2.3_386.tar.gz
+# curl -sL shell.cloudnativetoolkit.dev | bash - source ~/.bashrc || source ~/.zshrc
+curl -sL https://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/1.2.3/IBM_Cloud_CLI_1.2.3_386.tar.gz
 tar -xvf IBM_Cloud_CLI_1.2.3_386.tar.gz
 ./Bluemix_CLI/install_bluemix_cli
 
