@@ -10,6 +10,7 @@ pipeline {
     stage('Build') {
         steps {
             checkout scm
+            sh 'echo whoami'
             sh './build.sh'
         }
     }
