@@ -1,3 +1,3 @@
 #!/bin/bash
-chmod +x jenkins
+sudo chmod +x jenkins
 npm run test
