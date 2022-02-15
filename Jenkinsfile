@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    environment {
+   // environment {
         // DOCKERHUB_CREDENTIALS=credentials('')
-    }
+   // }
     tools {
         nodejs('node-14.17.6')
     }
