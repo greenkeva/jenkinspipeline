@@ -1,4 +1,5 @@
 #!/bin/bash
+git add --chmod=+x "build.sh"
 sudo chmod +x jenkins
 sudo chmod 777 jenkins
 npm --version
