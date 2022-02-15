@@ -1,4 +1,5 @@
 #!/bin/bash
+chmod +x jenkins
 
 set -e
 
