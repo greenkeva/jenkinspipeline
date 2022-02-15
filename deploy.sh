@@ -1,6 +1,5 @@
 #!/bin/bash
-sudo chmod +x jenkins
-sudo chmod 777 jenkins
+
 
 set -e
 
