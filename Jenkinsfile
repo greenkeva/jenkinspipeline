@@ -9,16 +9,19 @@ pipeline {
     stages {
     stage('Build') {
         steps {
+            checkout scm
             sh './build.sh'
         }
     }
     stage('Test') {
         steps {
+            checkout scm
             sh './test.sh'
         }
     }
     stage('Deploy') {
         steps {
+            checkout scm
             sh './deploy.sh'
         }
     }
