@@ -30,7 +30,6 @@ pipeline {
             sh './Bluemix_CLI/install_bluemix_cli'
 
 
-            # Ignore updates because they need confirmation from the user
             sh 'bx config --check-version=false'
 
             sh bx api https://api.ng.bluemix.net
