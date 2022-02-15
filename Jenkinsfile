@@ -25,7 +25,20 @@ pipeline {
     }
     stage('Deploy') {
         steps {
+            sh 'wget https://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/1.2.3/IBM_Cloud_CLI_1.2.3_386.tar.gz'
+            sh 'tar -xvf IBM_Cloud_CLI_1.2.3_386.tar.gz'
+            sh './Bluemix_CLI/install_bluemix_cli'
+
+
+            # Ignore updates because they need confirmation from the user
+            sh 'bx config --check-version=false'
+
+            sh bx api https://api.ng.bluemix.net
+            bx login
+            bx target -o Shekeva.Green@ibm.com -s dev
+            bx cf push inspoquotes
             checkout scm
+            sh 'wget https://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/1.2.3/IBM_Cloud_CLI_1.2.3_386.tar.gz'
             sh 'chmod +x deploy.sh'
             sh './deploy.sh'
         }
