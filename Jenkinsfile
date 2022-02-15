@@ -17,12 +17,14 @@ pipeline {
     stage('Test') {
         steps {
             checkout scm
+            sh 'chmod +x test.sh'
             sh './test.sh'
         }
     }
     stage('Deploy') {
         steps {
             checkout scm
+            sh 'chmod +x deploy.sh'
             sh './deploy.sh'
         }
     }
