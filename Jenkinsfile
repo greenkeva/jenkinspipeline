@@ -32,10 +32,10 @@ pipeline {
 
             sh 'bx config --check-version=false'
 
-            sh bx api https://api.ng.bluemix.net
-            bx login
-            bx target -o Shekeva.Green@ibm.com -s dev
-            bx cf push inspoquotes
+            sh 'bx api https://api.ng.bluemix.net'
+            sh 'bx login'
+            sh 'bx target -o Shekeva.Green@ibm.com -s dev'
+            sh 'bx cf push inspoquotes'
             checkout scm
             sh 'wget https://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/1.2.3/IBM_Cloud_CLI_1.2.3_386.tar.gz'
             sh 'chmod +x deploy.sh'
