@@ -35,7 +35,7 @@ pipeline {
                     publishBuildRecord gitBranch: "${GIT_BRANCH}", gitCommit: "${GIT_COMMIT}", gitRepo: "${GIT_REPO}", result:"FAIL"
                 }
             }
-//     }
+    }
     stage('Test') {
         steps {
             checkout scm
@@ -51,11 +51,6 @@ pipeline {
         }
     }
     stage('Deploy') {
-        wrappers {
-        credentialsBinding {
-            string(IBM_CLOUD_DEVOPS_API_KEY, BM_CRED)
-        }
-    }
         steps {
             sh 'chmod +x deploy.sh'
             sh'./deploy.sh'
