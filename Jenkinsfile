@@ -35,7 +35,7 @@ pipeline {
                     publishBuildRecord gitBranch: "${GIT_BRANCH}", gitCommit: "${GIT_COMMIT}", gitRepo: "${GIT_REPO}", result:"FAIL"
                 }
             }
-    }
+//     }
     stage('Test') {
         steps {
             checkout scm
