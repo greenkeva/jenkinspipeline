@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "Deploying...."
+cf login -a https://api.us-south.cf.cloud.ibm.com -u apikey $IBM_CLOUD_DEVOPS_API_KEY -o $IBM_CLOUD_DEVOPS_ORG -s dev
 export CF_APP_NAME="prod-$IBM_CLOUD_DEVOPS_APP_NAME"
 cf delete $CF_APP_NAME -f
 cf push $CF_APP_NAME --hostname inspoquotes -b staticfile_buildpack
