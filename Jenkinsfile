@@ -14,17 +14,40 @@ pipeline {
     }
     stages {
     stage('Build') {
+        environment {
+                // get git commit from Jenkins
+                GIT_COMMIT = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+                GIT_BRANCH = 'master'
+                GIT_REPO = 'https://us-south.git.cloud.ibm.com/Shekeva.Green/deploy_demo.git'
+        }
         steps {
             checkout scm
             sh 'chmod +x build.sh'
             sh './build.sh'
         }
     }
+    // post build section to use "publishBuildRecord" method to publish build record
+            post {
+                success {
+                    publishBuildRecord gitBranch: "${GIT_BRANCH}", gitCommit: "${GIT_COMMIT}", gitRepo: "${GIT_REPO}", result:"SUCCESS"
+                }
+                failure {
+                    publishBuildRecord gitBranch: "${GIT_BRANCH}", gitCommit: "${GIT_COMMIT}", gitRepo: "${GIT_REPO}", result:"FAIL"
+                }
+            }
+    }
     stage('Test') {
         steps {
             checkout scm
             sh 'chmod +x test.sh'
             sh './test.sh'
+        }
+        // post build section to use "publishTestResult" method to publish test result
+        post {
+            always {
+                publishTestResult type:'unittest', fileLocation: './mochatest.json'
+                publishTestResult type:'code', fileLocation: './tests/coverage/reports/coverage-summary.json'
+            }
         }
     }
     stage('Deploy') {
