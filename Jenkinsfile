@@ -28,6 +28,11 @@ pipeline {
         }
     }
     stage('Deploy') {
+        wrappers {
+        credentialsBinding {
+            string(IBM_CLOUD_DEVOPS_API_KEY, BM_CRED)
+        }
+    }
         steps {
             sh 'chmod +x deploy.sh'
             sh'./deploy.sh'
