@@ -1,22 +1,10 @@
 #!/bin/bash
 
+echo "Deploying...."
+export CF_APP_NAME="prod-$IBM_CLOUD_DEVOPS_APP_NAME"
+cf delete $CF_APP_NAME -f
+cf push $CF_APP_NAME --hostname inspoquotes -b staticfile_buildpack
+#  use "cf icd --create-connection" to enable traceability
+cf icd --create-connection $IBM_CLOUD_DEVOPS_WEBHOOK_URL $CF_APP_NAME
 
-//set -e
-
-
-echo "Installing the IBM Cloud CLI"
-
-
-curl -sL shell.cloudnativetoolkit.dev | bash - source ~/.bashrc || source ~/.zshrc
-# curl -fsSL https://public.dhe.ibm.com/cloud/bluemix/cli/bluemix-cli/1.2.3/IBM_Cloud_CLI_1.2.3_386.tar.gz
-#tar -xvf IBM_Cloud_CLI_1.2.3_386.tar.gz
-#./Bluemix_CLI/install_bluemix_cli
-
-
-# Ignore updates because they need confirmation from the user
-bx config --check-version=false
-
-bx api https://api.ng.bluemix.net
-bx login
-bx target -o Shekeva.Green@ibm.com -s dev
-bx cf push inspoquotes
+export APP_URL=http://$(cf app $CF_APP_NAME | grep urls: | awk '{print $2}')
