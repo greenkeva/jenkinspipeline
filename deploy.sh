@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Deploying...."
+echo "Triggering Deployment...."
 
 ibmcloud login --apikey "$IBM_CLOUD_DEVOPS_API_KEY" -a https://api.ng.bluemix.net
 ibmcloud target --cf
