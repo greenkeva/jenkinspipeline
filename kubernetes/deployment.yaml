@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: inspoquotes
+  name: inspoquotes-deployment
   labels:
     app: inspoquotes
 spec:
@@ -15,7 +15,7 @@ spec:
         app: inspoquotes
     spec:
       containers:
-        - name: inspoquotes-cs
+        - name: 201020122013/cicd:{{BUILD_NUMBER}}
           image:
           ports:
             - containerPort: 8080
