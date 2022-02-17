@@ -36,9 +36,12 @@ pipeline {
     }
     stage('Docker login') {
         steps {
+            withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
             checkout scm
             sh 'chmod +x scripts/login.sh'
             sh './scripts/login.sh'
+            
+            }
         }
     }
       stage('Docker build and push') {
