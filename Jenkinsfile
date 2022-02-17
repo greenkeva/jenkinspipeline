@@ -35,8 +35,9 @@ pipeline {
     }
     stage('Deploy') {
         steps {
-            sh 'chmod +x scripts/deploy.sh'
-            sh'./scripts/deploy.sh'
+            script{
+                kubernetesDeploy(configs: "./kubernetes/deployment.yaml", kubeconfigId: "kubeconfigId")
+            }
         }
     }
   }
