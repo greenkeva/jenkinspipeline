@@ -1,6 +1,9 @@
 #!/bin/bash
 
-echo "Deploying...."
+echo "Triggering Deployment...."
+
+ibmcloud login --apikey "$IBM_CLOUD_DEVOPS_API_KEY" -a https://api.ng.bluemix.net
+ibmcloud target --cf
 cf login -a https://api.us-south.cf.cloud.ibm.com -u apikey $IBM_CLOUD_DEVOPS_API_KEY -o $IBM_CLOUD_DEVOPS_ORG -s dev
 export CF_APP_NAME="prod-$IBM_CLOUD_DEVOPS_APP_NAME"
 cf delete $CF_APP_NAME -f
