@@ -43,20 +43,6 @@ pipeline {
             sh './scripts/test.sh'
         }
     }
-    stage('Log in to Docker') {
-        steps {
-            checkout scm
-            sh 'chmod +x scripts/login.sh'
-            sh './scripts/login.sh'
-        }
-    }
-    stage('Push to Docker') {
-        steps {
-            checkout scm
-            sh 'chmod +x scripts/dockerpush.sh'
-            sh './scripts/dockerpush.sh'
-        }
-    }
     stage('Deploy') {
         steps {
             sh 'chmod +x scripts/deploy.sh'
