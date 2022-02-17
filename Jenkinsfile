@@ -25,6 +25,7 @@ pipeline {
             sh 'chmod +x scripts/build.sh'
             sh './scripts/build.sh'
         }
+    }
     stage('Test') {
         steps {
             checkout scm
