@@ -8,6 +8,7 @@ pipeline {
         IBM_CLOUD_DEVOPS_APP_NAME='inspoquotes'
         IBM_CLOUD_DEVOPS_TOOLCHAIN_ID='3ffa5313-95b8-4ee5-9c34-2cd3c69d916f'
         IBM_CLOUD_DEVOPS_WEBHOOK_URL='https://jenkins:05bd52b4-61f8-49a2-b7a0-c7bb4ef57444:dc3463c2-ca69-41fe-bef4-b9590489aac1@devops-api.us-south.devops.cloud.ibm.com/v1/toolint/messaging/webhook/publish'
+        kube=kube
    }
     tools {
         nodejs('node-14.17.6')
