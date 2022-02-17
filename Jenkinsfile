@@ -2,7 +2,7 @@ pipeline {
     agent any
    environment {
         //DOCKERHUB_CREDENTIALS=credentials('')
-        IBM_CLOUD_DEVOPS_CREDS=credentials('BM_CRED')
+        IBM_CLOUD_DEVOPS_CREDS=credentials('IBM_CLOUD_DEVOPS_CREDS')
         IBM_CLOUD_DEVOPS_API_KEY='YOUR_API_KEY_ID'
         IBM_CLOUD_DEVOPS_ORG='Shekeva.Green@ibm.com'
         IBM_CLOUD_DEVOPS_APP_NAME='inspoquotes'
