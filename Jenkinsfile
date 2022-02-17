@@ -1,7 +1,7 @@
 pipeline {
     agent any
    environment {
-        //DOCKERHUB_CREDENTIALS=credentials('')
+        DOCKERHUB_CREDENTIALS=credentials('DOCKER_HUB')
         IBM_CLOUD_DEVOPS_CREDS=credentials('IBM_CLOUD_DEVOPS_CREDS')
         IBM_CLOUD_DEVOPS_API_KEY='YOUR_API_KEY_ID'
         IBM_CLOUD_DEVOPS_ORG='Shekeva.Green@ibm.com'
@@ -22,8 +22,8 @@ pipeline {
         }
         steps {
             checkout scm
-            sh 'chmod +x build.sh'
-            sh './build.sh'
+            sh 'chmod +x scripts/build.sh'
+            sh './scripts/build.sh'
         }
     
     // post build section to use "publishBuildRecord" method to publish build record
@@ -39,14 +39,28 @@ pipeline {
     stage('Test') {
         steps {
             checkout scm
-            sh 'chmod +x test.sh'
-            sh './test.sh'
+            sh 'chmod +x scripts/test.sh'
+            sh './scripts/test.sh'
+        }
+    }
+    stage('Log in to Docker') {
+        steps {
+            checkout scm
+            sh 'chmod +x scripts/login.sh'
+            sh './scripts/login.sh'
+        }
+    }
+    stage('Push to Docker') {
+        steps {
+            checkout scm
+            sh 'chmod +x scripts/dockerpush.sh'
+            sh './scripts/dockerpush.sh'
         }
     }
     stage('Deploy') {
         steps {
-            sh 'chmod +x deploy.sh'
-            sh'./deploy.sh'
+            sh 'chmod +x scripts/deploy.sh'
+            sh'./scripts/deploy.sh'
         }
         post {
         success {
