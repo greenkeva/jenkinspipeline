@@ -25,17 +25,6 @@ pipeline {
             sh 'chmod +x scripts/build.sh'
             sh './scripts/build.sh'
         }
-    
-    // post build section to use "publishBuildRecord" method to publish build record
-        post {
-            success {
-                notifyOTC stageName: "Deploy", status: "SUCCESS"
-            }
-            failure {
-                notifyOTC stageName: "Deploy", status: "FAILURE"
-            }
-        }
-    }
     stage('Test') {
         steps {
             checkout scm
@@ -48,15 +37,6 @@ pipeline {
             sh 'chmod +x scripts/deploy.sh'
             sh'./scripts/deploy.sh'
         }
-        post {
-        success {
-            notifyOTC stageName: "Deploy", status: "SUCCESS"
-            sendDeployableMessage status: "SUCCESS"
-        }
-        failure {
-            notifyOTC stageName: "Deploy", status: "FAILURE"
-        }
-    }
     }
   }
 }
