@@ -39,8 +39,8 @@ pipeline {
     stage('Docker login') {
         steps {
             withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-            checkout scm
             sh 'docker build -t 201020122013/cicd:${BUILD_NUMBER} .'
+            sh "docker login -u ${dockerHubUser} -p ${dockerHubPassword}"
             sh 'docker push 201020122013/cicd:${BUILD_NUMBER}'
             
             }
