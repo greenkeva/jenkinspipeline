@@ -40,7 +40,6 @@ pipeline {
         steps {
             withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
             sh "docker login -u ${dockerHubUser} --password-stdin ${dockerHubPassword}"
-            sh 'chmod +x scripts/dockerpush.sh'
             sh 'docker start service'
             sh 'docker build -t 201020122013/cicd:${BUILD_NUMBER} .'
             sh 'docker run --rm 201020122013/cicd:${BUILD_NUMBER}'
