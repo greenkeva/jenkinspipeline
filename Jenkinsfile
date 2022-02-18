@@ -36,18 +36,18 @@ pipeline {
             sh './scripts/test.sh'
         }
     }
-    stage('Docker login') {
-        steps {
-            withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-            sh "docker login -u ${dockerHubUser} -p ${dockerHubPassword}"
-            sh 'docker run --privileged=true 201020122013/cicd'
-            sh 'docker build -t 201020122013/cicd:${BUILD_NUMBER} .'
-            sh 'docker run --priveleged=true --rm 201020122013/cicd:${BUILD_NUMBER}'
-            sh 'docker push 201020122013/cicd:${BUILD_NUMBER}'
+    // stage('Docker login') {
+    //     steps {
+    //         withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+    //         sh "docker login -u ${dockerHubUser} -p ${dockerHubPassword}"
+    //         sh 'docker run --privileged=true 201020122013/cicd'
+    //         sh 'docker build -t 201020122013/cicd:${BUILD_NUMBER} .'
+    //         sh 'docker run --priveleged=true --rm 201020122013/cicd:${BUILD_NUMBER}'
+    //         sh 'docker push 201020122013/cicd:${BUILD_NUMBER}'
             
-            }
-        }
-    }
+    //         }
+    //     }
+    // }
     //   stage('Docker build and push') {
     //     steps {
     //         checkout scm
