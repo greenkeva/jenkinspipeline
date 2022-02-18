@@ -41,10 +41,10 @@ pipeline {
             withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
             sh "docker login -u ${dockerHubUser} -p ${dockerHubPassword}"
             sh 'chmod +x scripts/dockerpush.sh'
-            sh 'sudo groupadd docker'
-            sh 'sudo usermod -aG docker $USER'
+            sh 'groupadd docker'
+            sh 'usermod -aG docker $USER'
             sh 'newgrp docker'
-            sh 'sudo docker start service'
+            sh 'docker start service'
             sh 'docker build -t 201020122013/cicd:${BUILD_NUMBER} .'
             sh 'docker run --rm 201020122013/cicd:${BUILD_NUMBER}'
             sh 'docker push 201020122013/cicd:${BUILD_NUMBER}'
