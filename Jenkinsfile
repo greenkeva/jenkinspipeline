@@ -40,19 +40,19 @@ pipeline {
         steps {
             withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
             checkout scm
-            sh 'chmod +x scripts/login.sh'
-            sh './scripts/login.sh'
+            docker build -t 201020122013/cicd:{BUILD_NUMBER} .
+            docker push 201020122013/cicd:{BUILD_NUMBER}
             
             }
         }
     }
-      stage('Docker build and push') {
-        steps {
-            checkout scm
-            sh 'chmod +x scripts/dockerpush.sh'
-            sh './scripts/dockerpush.sh'
-        }
-    }
+    //   stage('Docker build and push') {
+    //     steps {
+    //         checkout scm
+    //         sh 'chmod +x scripts/dockerpush.sh'
+    //         sh './scripts/dockerpush.sh'
+    //     }
+    // }
     stage('Deploy') {
         steps {
             script{
