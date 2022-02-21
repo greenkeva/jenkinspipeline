@@ -9,8 +9,9 @@ pipeline {
         IBM_CLOUD_DEVOPS_TOOLCHAIN_ID='3ffa5313-95b8-4ee5-9c34-2cd3c69d916f'
         IBM_CLOUD_DEVOPS_WEBHOOK_URL='https://jenkins:05bd52b4-61f8-49a2-b7a0-c7bb4ef57444:dc3463c2-ca69-41fe-bef4-b9590489aac1@devops-api.us-south.devops.cloud.ibm.com/v1/toolint/messaging/webhook/publish'
         kubeconfigId='kubeconfigId'
-        dockerHubPassword='dockerHubPassword'
-        dockerHubUser='dockerHubUser'
+        registry = "201020122013/cicd" 
+        registryCredential = 'dockerhub_id' 
+        dockerImage = '' 
    }
     tools {
         nodejs('node-14.17.6')
@@ -36,18 +37,23 @@ pipeline {
             sh './scripts/test.sh'
         }
     }
-    // stage('Docker login') {
-    //     steps {
-    //         withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-    //         sh "docker login -u ${dockerHubUser} -p ${dockerHubPassword}"
-    //         sh 'docker run --privileged=true 201020122013/cicd'
-    //         sh 'docker build -t 201020122013/cicd:${BUILD_NUMBER} .'
-    //         sh 'docker run --priveleged=true --rm 201020122013/cicd:${BUILD_NUMBER}'
-    //         sh 'docker push 201020122013/cicd:${BUILD_NUMBER}'
-            
-    //         }
-    //     }
-    // }
+    stage('Building our image') { 
+            steps { 
+                script { 
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+                }
+            } 
+        }
+    stage('Docker login') {
+        steps {
+            script{
+                docker.withRegistry( '', registryCredential ) { 
+                        dockerImage.push() 
+
+                    }
+            }
+        }
+    }
     //   stage('Docker build and push') {
     //     steps {
     //         checkout scm
