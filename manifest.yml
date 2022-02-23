@@ -3,5 +3,6 @@ applications:
   - name: inspoquotes
     random-route: true
     memory: 256M
-    path: /workspace/41cdc385-37f9-494d-87e5-78dc48f65039/build
+    host: inspoquotes
+    path: /build
     buildpack: staticfile_buildpack
