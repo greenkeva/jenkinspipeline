@@ -25,7 +25,7 @@ const Home = () => {
         return (
         <div id="div">
         <div id="quotes">
-            <h2>Quote for Your Day </h2>
+            <h2>Random Quote for Your Day </h2>
         </div>
         <div id="quote">
             <h2>{error}</h2>
@@ -36,7 +36,7 @@ const Home = () => {
     return (
         <div>
         <div id="quotes">
-            <h2>Random Daily Quotes </h2>;
+            <h2>Random Quotes </h2>;
         </div>
         <div id="container">
             <h2>{quote}</h2>
