@@ -25,7 +25,7 @@ const Home = () => {
         return (
         <div id="div">
         <div id="quotes">
-            <h2>Random Quote for Today </h2>
+            <h2>Daily Quote</h2>
         </div>
         <div id="quote">
             <h2>{error}</h2>
