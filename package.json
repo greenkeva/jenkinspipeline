@@ -18,9 +18,9 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "sh -ac '. .env.build; react-scripts start",
     "build": "react-scripts build",
-    "build:staging": "env-cmd -f .env npm run build",
+    "build:staging": "env-cmd -f .env.staging npm run build",
     "test-setup": "npm run setup",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
