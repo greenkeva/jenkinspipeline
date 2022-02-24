@@ -25,7 +25,7 @@ const Home = () => {
         return (
         <div id="div">
         <div id="quotes">
-            <h2>Hello There Ani!  Welcome to our site!</h2>
+            <h2>Hello There Ani, Welcome to our site!</h2>
         </div>
         <div id="quote">
             <h2>{error}</h2>
