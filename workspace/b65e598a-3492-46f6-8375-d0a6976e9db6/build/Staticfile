@@ -1,1 +1,0 @@
-cf push inspoquotes --hostname inspoquotes -b staticfile_buildpack
