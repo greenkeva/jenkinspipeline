@@ -25,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.ibm.com/Shekeva-Green/deploy_demo.git"
+    "url": "https://github.com/greenkeva/jenkinspipeline.git"
   },
   "eslintConfig": {
     "extends": [
