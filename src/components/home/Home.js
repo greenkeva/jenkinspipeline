@@ -36,7 +36,7 @@ const Home = () => {
     return (
         <div>
         <div id="quotes">
-            <h2>Today's Quote </h2>;
+            <h2>Quote Today</h2>;
         </div>
         <div id="container">
             <h2>{quote}</h2>
