@@ -18,14 +18,14 @@ const Home = () => {
         . then(data => {
             setQuote(data.content);
         })
-        .catch(error => setError("No quote today...!"))
+        .catch(error => setError("A Good Day for a quote...!"))
     }, [])
 
     if(error)
         return (
         <div id="div">
         <div id="quotes">
-            <h2>Hello There!  Welcome to our site!</h2>
+            <h2>Hello There Ani!  Welcome to our site!</h2>
         </div>
         <div id="quote">
             <h2>{error}</h2>
