@@ -1,0 +1,7 @@
+applications:
+  - name: inspoquotes
+    random-route: true
+    memory: 256M
+    host: inspoquotes
+    path: /workspace/45b6c944-4aa8-4688-b042-ea3e3d4290bc/build
+    buildpack: staticfile_buildpack
