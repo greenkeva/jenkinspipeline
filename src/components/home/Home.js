@@ -7,6 +7,7 @@ import './Home.css';
 const Home = () => {
     const [quote, setQuote] = useState('');
     const [error, setError] = useState('');
+    const toggle = Math.floor(Math.random() * 10);
 
     useEffect(() =>{
         fetch(`${process.env.REACT_APP_API_KEY}`)
@@ -32,6 +33,18 @@ const Home = () => {
         </div>
         
         </div>    
+        )
+        
+        if(toggle <  5)
+        return (
+            <div>
+            <div id="quotes">
+                <h2>Toggle On!</h2>;
+            </div>
+            <div id="container">
+                <h2>{quote}</h2>
+            </div>
+            </div>      
         )
     return (
         <div>
